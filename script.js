@@ -41,9 +41,18 @@ app.get("/", (req, res) => {
   res.sendFile("login.html", { root: __dirname }); // Use the calculated __dirname here
 });
 
-// Route to serve the index.html file (This is the main page of the website directed to from the script in login.html)
-app.get("/index.html", (req, res) => {
-  res.sendFile("index.html", { root: __dirname }); // Use the calculated __dirname here
+// Middleware function to check if user is authenticated
+function requireLogin(req, res, next) {
+  if (!req.session.user) {
+    res.redirect("/");
+  } else {
+    next(); // Continue to the next middleware or route handler
+  }
+}
+
+// Update the route for index.html to use the requireLogin middleware
+app.get("/index.html", requireLogin, (req, res) => {
+  res.sendFile("index.html", { root: __dirname });
 });
 
 // Route to handle user sign-in
@@ -68,8 +77,15 @@ app.post("/signin", async (req, res) => {
     const passwordMatch = await bcrypt.compare(password, user.password);
 
     if (passwordMatch) {
-      // Assuming you handle sessions or tokens here
-      res.send("User logged in successfully");
+      // Store user data in session
+      req.session.user = {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+      };
+
+      // Redirect to index.html upon successful login
+      res.redirect("/index.html");
     } else {
       res.status(401).send("Incorrect password");
     }
@@ -77,6 +93,12 @@ app.post("/signin", async (req, res) => {
     console.error("Error signing in:", error);
     res.status(500).send("An error occurred while signing in");
   }
+});
+
+// Route to handle user logout
+app.get("/signout", (req, res) => {
+  req.session.destroy();
+  res.redirect("/");
 });
 
 // Route to handle user registration
@@ -102,7 +124,7 @@ app.post("/register", async (req, res) => {
       email: newUser.email,
     };
 
-    res.send("User registered successfully");
+    res.redirect("/");
   } catch (error) {
     console.error("Error registering user:", error);
     res.status(500).send("An error occurred while registering user");

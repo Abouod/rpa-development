@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/styles/login.css">
     <title>Login Page</title>
 </head>
 
@@ -13,40 +13,85 @@
 
     <div class="container" id="container">
         <div class="form-container sign-up">
-            <form>
+            <form action="/register" method="POST">
                 <h1>Create Account</h1>
-                <input type="text" placeholder="Name">
-                <input type="email" placeholder="Email">
-                <input type="password" placeholder="Password">
-                <button>Sign Up</button>
+                <input type="text" placeholder="Name" name="name">
+                <input type="email" placeholder="Email" name="email">
+                <input type="password" placeholder="Password" name="password">
+                <button type="submit">Sign Up</button>
             </form>
         </div>
         <div class="form-container sign-in">
-            <form>
+            <form id="signInForm" action="/signin" method="POST">
                 <h1>Sign In</h1>
-                <input type="email" placeholder="Email">
-                <input type="password" placeholder="Password">
-                <a href="#">Forget Your Password?</a>
-                <button>Sign In</button>
+                <input type="email" placeholder="Email" name="email">
+                <input type="password" placeholder="Password" name="password">
+                <span id="passwordError" style="color: red; display: none;">Incorrect Password</span>
+                <!-- <a href="#">Forget Your Password?</a> -->
+                <button type="submit">Sign In</button>
             </form>
         </div>
         <div class="toggle-container">
             <div class="toggle">
                 <div class="toggle-panel toggle-left">
-                    <h1>Welcome Back!</h1>
-                    <p>Enter your personal details to use all of site features</p>
+                    <img class="logo" src="/images/Sophic-Logo-rotating-globe-2.gif" alt="Sophic Logo">
+                    <p>Register with your personal details</p>
                     <button class="hidden" id="login">Sign In</button>
                 </div>
                 <div class="toggle-panel toggle-right">
-                    <h1>Hello, Friend!</h1>
-                    <p>Register with your personal details to use all of site features</p>
+                    <img class="logo" src="/images/Sophic-Logo-rotating-globe-2.gif" alt="Sophic Logo">
+
+                    <p>Sophic RPA Document Automation</p>
                     <button class="hidden" id="register">Sign Up</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <footer>
+        <div id="footer">
+            <div id="left-column">
+                <span id="copyright">
+                    © 2023 Copyright Sophic Automation Sdn. Bhd. All Rights Reserved.
+                    <br>
+                    Designed by Sophic Automation Sdn. Bhd.
+                </span>
+            </div>
+            <div id="right-column">
+                <span id="version">v1.0.0</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const container = document.getElementById('container');
+        const registerBtn = document.getElementById('register');
+        const loginBtn = document.getElementById('login');
+
+        registerBtn.addEventListener('click', () => {
+            container.classList.add("active");
+        });
+
+        loginBtn.addEventListener('click', () => {
+            container.classList.remove("active");
+        });
+
+        document.getElementById('signInForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Stops the form from being submitted (Which would cause the page to reload)
+
+            const formData = new FormData(this); //Creates a new FormData object, passing this (which refers to the form element that triggered the submit event). FormData is a way to easily package all form inputs for sending.
+            fetch('/signin', {//Using the fetch API to send an asynchronous HTTP POST request to the server at the /signin endpoint. The body of the request is the formData object, which contains the user email and password.
+                method: 'POST',
+                body: formData
+            }).then(response => {
+                if (response.status === 401) {
+                    document.getElementById('passwordError').style.display = 'block'; // Show the error message
+                } else {
+                    window.location.href = '/someSuccessPage'; // Redirect on successful login '/someSuccessPage' should be replaced with the actual URL you want to redirect to.
+                }
+            }).catch(error => console.error('Error:', error)); //Catches any error that occur during the fetch request (for example, network errors) and logs them to the console.
+        });
+    </script>
 </body>
 
 </html>

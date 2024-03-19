@@ -8,6 +8,15 @@
   --fourth-color: #112d4e;
 }
 
+body {
+  background-color: var(--first-color);
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 /* Custom Navbar Styles */
 .custom-navbar {
   background-color: var(--fourth-color);
@@ -22,10 +31,27 @@
 
 .navbar-container {
   width: 90%;
-  margin: 0 auto;
+  margin: 10px auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.bar {
+  margin-left: 40px;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.5); /* Set the color with an alpha value */
+}
+
+.navbar-text {
+  margin-left: 40px;
+  font-size: 1rem;
+  color: white;
 }
 
 .navbar-logo {
@@ -34,32 +60,12 @@
 }
 
 .logo {
-  height: 5rem;
+  height: 4rem;
   width: auto;
   margin-top: -0.5rem; /* Negative margin for vertical alignment */
   margin-bottom: -0.5rem;
 }
 
-/* .navbar-links {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  position: relative;
-} */
-
-.navbar-links li {
-  margin-left: 20px; /* Space between menu items */
-}
-
-.navbar-links a {
-  color: white; /* Menu item text color */
-  text-decoration: none;
-  padding: 5px 10px;
-  transition: color 0.3s;
-}
-
-.navbar-links a:hover,
-.navbar-links a.active {
-  color: var(--third-color); /* Menu item hover and active state color */
+.dropdown-item:hover {
+  color: #00f400;
 }

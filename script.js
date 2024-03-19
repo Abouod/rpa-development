@@ -41,6 +41,11 @@ app.get("/", (req, res) => {
   res.sendFile("login.html", { root: __dirname }); // Use the calculated __dirname here
 });
 
+// Route to serve the index.html file (This is the main page of the website directed to from the script in login.html)
+app.get("/index.html", (req, res) => {
+  res.sendFile("index.html", { root: __dirname }); // Use the calculated __dirname here
+});
+
 // Route to handle user sign-in
 app.post("/signin", async (req, res) => {
   const { email, password } = req.body;

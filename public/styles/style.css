@@ -1,0 +1,65 @@
+:root {
+  --first-color: #f9f7f7;
+
+  --second-color: #dbe2ef;
+
+  --third-color: #3f72af;
+
+  --fourth-color: #112d4e;
+}
+
+/* Custom Navbar Styles */
+.custom-navbar {
+  background-color: var(--fourth-color);
+  padding: 0.5rem 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.navbar-container {
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 5rem;
+  width: auto;
+  margin-top: -0.5rem; /* Negative margin for vertical alignment */
+  margin-bottom: -0.5rem;
+}
+
+/* .navbar-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  position: relative;
+} */
+
+.navbar-links li {
+  margin-left: 20px; /* Space between menu items */
+}
+
+.navbar-links a {
+  color: white; /* Menu item text color */
+  text-decoration: none;
+  padding: 5px 10px;
+  transition: color 0.3s;
+}
+
+.navbar-links a:hover,
+.navbar-links a.active {
+  color: var(--third-color); /* Menu item hover and active state color */
+}

@@ -10,6 +10,12 @@
   --fourth-color: #112d4e;
 }
 
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -213,6 +219,16 @@ body {
 .logo {
   max-width: 60%;
   height: auto;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #333; /* Example background color */
+  color: white; /* Example text color */
+  text-align: center;
 }
 
 #footer {

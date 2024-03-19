@@ -10,7 +10,6 @@
 </head>
 
 <body>
-
     <div class="container" id="container">
         <div class="form-container sign-up">
             <form action="/register" method="POST">
@@ -64,32 +63,31 @@
     </footer>
 
     <script>
-        const container = document.getElementById('container');
-        const registerBtn = document.getElementById('register');
-        const loginBtn = document.getElementById('login');
+        document.getElementById('signInForm').addEventListener('submit', async function (event) {
+            event.preventDefault(); // Prevent form from submitting the traditional way
 
-        registerBtn.addEventListener('click', () => {
-            container.classList.add("active");
-        });
+            const email = this.email.value;
+            const password = this.password.value;
 
-        loginBtn.addEventListener('click', () => {
-            container.classList.remove("active");
-        });
+            try {
+                const response = await fetch('/signin', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, password })
+                });
 
-        document.getElementById('signInForm').addEventListener('submit', function (event) {
-            event.preventDefault(); // Stops the form from being submitted (Which would cause the page to reload)
-
-            const formData = new FormData(this); //Creates a new FormData object, passing this (which refers to the form element that triggered the submit event). FormData is a way to easily package all form inputs for sending.
-            fetch('/signin', {//Using the fetch API to send an asynchronous HTTP POST request to the server at the /signin endpoint. The body of the request is the formData object, which contains the user email and password.
-                method: 'POST',
-                body: formData
-            }).then(response => {
                 if (response.status === 401) {
-                    document.getElementById('passwordError').style.display = 'block'; // Show the error message
+                    document.getElementById('passwordError').style.display = 'block';
+                } else if (response.ok) {
+                    window.location.href = '/index.html';
                 } else {
-                    window.location.href = '/someSuccessPage'; // Redirect on successful login '/someSuccessPage' should be replaced with the actual URL you want to redirect to.
+                    throw new Error('Failed to login');
                 }
-            }).catch(error => console.error('Error:', error)); //Catches any error that occur during the fetch request (for example, network errors) and logs them to the console.
+            } catch (error) {
+                console.error('Error:', error);
+            }
         });
     </script>
 </body>

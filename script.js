@@ -22,7 +22,10 @@ const db = new pg.Client({
 db.connect();
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json()); // for parsing application/json
 app.use(express.static("public"));
+// app.use(express.static(path.join(__dirname, "styles")));
+// app.use(express.static(path.join(__dirname, "images")));
 
 // Configure express-session middleware
 app.use(
@@ -42,6 +45,10 @@ app.get("/", (req, res) => {
 app.post("/signin", async (req, res) => {
   const { email, password } = req.body;
 
+  if (!email || !password) {
+    return res.status(400).send("Email and password are required");
+  }
+
   try {
     const userQuery = await db.query("SELECT * FROM users WHERE email = $1", [
       email,
@@ -56,6 +63,7 @@ app.post("/signin", async (req, res) => {
     const passwordMatch = await bcrypt.compare(password, user.password);
 
     if (passwordMatch) {
+      // Assuming you handle sessions or tokens here
       res.send("User logged in successfully");
     } else {
       res.status(401).send("Incorrect password");

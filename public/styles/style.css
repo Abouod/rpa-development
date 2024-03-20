@@ -15,6 +15,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  padding-top: 60px;
 }
 
 /* Custom Navbar Styles */
@@ -27,6 +28,7 @@ body {
   left: 0;
   width: 100%;
   z-index: 1000;
+  display: block;
 }
 
 .navbar-container {
@@ -45,7 +47,7 @@ body {
 .bar {
   margin-left: 40px;
   font-size: 1rem;
-  color: rgba(255, 255, 255, 0.5); /* Set the color with an alpha value */
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .navbar-text {
@@ -62,10 +64,81 @@ body {
 .logo {
   height: 4rem;
   width: auto;
-  margin-top: -0.5rem; /* Negative margin for vertical alignment */
+  margin-top: -0.5rem;
   margin-bottom: -0.5rem;
 }
 
 .dropdown-item:hover {
-  color: #00f400;
+  color: initial;
+}
+
+.heading-text {
+  text-align: center;
+  margin-top: 120px;
+  margin-right: 55%;
+  display: block;
+  color: var(--fourth-color);
+}
+
+.page-divider {
+  margin: 0 calc(25% + (-190px)); /* Adjust as needed */
+  border: none;
+  border-top: 1px solid rgb(0, 0, 0); /* Example border style */
+}
+.card-deck {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Center the cards horizontally */
+  margin-top: 100px;
+}
+
+.card {
+  flex: 0 0 auto; /* Prevent the cards from growing */
+  margin-bottom: 15px; /* Add some bottom margin between cards */
+  margin-right: 15px; /* Add some right margin between cards */
+  width: calc(50% - 30px); /* Adjust the width of each card */
+  max-width: 350px; /* Set a maximum width for the cards */
+}
+
+.custom-card {
+  background-color: var(--fourth-color); /* Coral color */
+  color: #fff; /* White text color */
+}
+
+.card-title {
+  /* color: #ff7c41; */
+  color: var(--fourth-color);
+}
+
+.card-body {
+  margin: 0;
+  padding: 10px;
+  /* background-color: var(--fourth-color); */
+}
+
+.card-img-top {
+  height: 200px; /* Set the desired height */
+  width: 100%; /* Ensure the image takes up the full width of its container */
+  object-fit: cover; /* Maintain aspect ratio and cover the entire container */
+}
+
+.box {
+  margin: 10px;
+}
+
+@media (max-width: 767.98px) {
+  .card {
+    width: calc(
+      50% - 30px
+    ); /* Adjust the width of each card for smaller screens */
+  }
+}
+
+@media (max-width: 575.98px) {
+  .card {
+    width: calc(
+      100% - 30px
+    ); /* Adjust the width of each card for even smaller screens */
+    margin-right: 0; /* Remove right margin for cards on smaller screens */
+  }
 }

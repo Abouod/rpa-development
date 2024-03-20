@@ -96,8 +96,9 @@ body {
   flex: 0 0 auto; /* Prevent the cards from growing */
   margin-bottom: 15px; /* Add some bottom margin between cards */
   margin-right: 15px; /* Add some right margin between cards */
-  width: calc(50% - 30px); /* Adjust the width of each card */
-  max-width: 350px; /* Set a maximum width for the cards */
+  min-width: calc(
+    50% - 220px
+  ); /* Adjust the width to show only two cards per row */
 }
 
 .custom-card {
@@ -125,7 +126,6 @@ body {
 .box {
   margin: 10px;
 }
-
 @media (max-width: 767.98px) {
   .card {
     width: calc(

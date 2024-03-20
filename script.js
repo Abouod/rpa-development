@@ -5,6 +5,7 @@ import session from "express-session"; // Import express-session
 import path from "path";
 import { fileURLToPath } from "url";
 import bcrypt from "bcrypt"; // Import bcrypt for password hashing
+import ejs from "ejs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -20,6 +21,9 @@ const db = new pg.Client({
   port: 5432,
 });
 db.connect();
+
+// Set the view engine to ejs
+app.set("view engine", "ejs");
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json()); // for parsing application/json
@@ -55,9 +59,9 @@ app.get("/index.html", requireLogin, (req, res) => {
   res.sendFile("index.html", { root: __dirname });
 });
 
-// Update the route for index.html to use the requireLogin middleware
-app.get("/profile.html", requireLogin, (req, res) => {
-  res.sendFile("profile.html", { root: __dirname });
+app.get("/profile", requireLogin, (req, res) => {
+  const user = req.session.user;
+  res.render("profile", { user }); // Pass user data to the profile page
 });
 
 // Route to handle user sign-in

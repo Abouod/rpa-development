@@ -55,6 +55,11 @@ app.get("/index.html", requireLogin, (req, res) => {
   res.sendFile("index.html", { root: __dirname });
 });
 
+// Update the route for index.html to use the requireLogin middleware
+app.get("/profile.html", requireLogin, (req, res) => {
+  res.sendFile("profile.html", { root: __dirname });
+});
+
 // Route to handle user sign-in
 app.post("/signin", async (req, res) => {
   const { email, password } = req.body;

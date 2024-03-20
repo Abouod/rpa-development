@@ -1,0 +1,139 @@
+/* Import Font Dancing Script */
+@import url(https://fonts.googleapis.com/css?family=Dancing+Script);
+
+:root {
+  --first-color: #f9f7f7;
+
+  --second-color: #dbe2ef;
+
+  --third-color: #3f72af;
+
+  --fourth-color: #112d4e;
+}
+
+* {
+  margin: 0;
+}
+
+body {
+  background-color: var(--first-color);
+  font-family: Arial;
+  overflow: hidden;
+}
+
+/* Custom Navbar Styles */
+.custom-navbar {
+  background-color: var(--fourth-color);
+  padding: 0.5rem 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  display: block;
+}
+
+.custom-btn,
+.droptown-toggle {
+  border: 1px solid white;
+  background-color: var(--fourth-color);
+}
+
+.navbar-container {
+  width: 90%;
+  margin: 10px auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.bar {
+  margin-left: 40px;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.navbar-text {
+  margin-left: 40px;
+  font-size: 1rem;
+  color: white;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 4rem;
+  width: auto;
+  margin-top: -0.5rem;
+  margin-bottom: -0.5rem;
+}
+
+.dropdown-item:hover {
+  color: initial;
+}
+
+.card {
+  border: none;
+  margin-top: 100px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.card:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background-color: var(--third-color);
+  transform: scaleY(1);
+  transition: all 0.5s;
+  transform-origin: bottom;
+}
+
+.card:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background-color: #0051b3;
+  transform: scaleY(0);
+  transition: all 0.5s;
+  transform-origin: bottom;
+}
+
+.card:hover::after {
+  transform: scaleY(1);
+}
+
+.details {
+  display: block;
+  margin: 20px auto;
+}
+
+/* .buttons button:nth-child(1) {
+  border: 1px solid var(--fourth-color) !important;
+  color: var(--fourth-color);
+  height: 40px;
+  border-radius: 10px;
+}
+
+.buttons button:nth-child(1):hover {
+  border: 1px solid var(--fourth-color) !important;
+  color: #fff;
+  height: 40px;
+  background-color: var(--fourth-color);
+} */

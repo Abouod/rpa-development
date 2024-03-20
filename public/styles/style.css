@@ -15,7 +15,6 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  padding-top: 60px;
 }
 
 /* Custom Navbar Styles */
@@ -29,6 +28,12 @@ body {
   width: 100%;
   z-index: 1000;
   display: block;
+}
+
+.custom-btn,
+.droptown-toggle {
+  border: 1px solid white;
+  background-color: var(--fourth-color);
 }
 
 .navbar-container {
@@ -74,7 +79,7 @@ body {
 
 .heading-text {
   text-align: center;
-  margin-top: 120px;
+  margin-top: 150px;
   margin-right: 55%;
   display: block;
   color: var(--fourth-color);
@@ -99,6 +104,7 @@ body {
   min-width: calc(
     50% - 220px
   ); /* Adjust the width to show only two cards per row */
+  cursor: pointer;
 }
 
 .custom-card {

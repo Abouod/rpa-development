@@ -2,13 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import pg from "pg";
 import session from "express-session"; // Import express-session
-import path from "path";
-import { fileURLToPath } from "url";
 import bcrypt from "bcrypt"; // Import bcrypt for password hashing
-import ejs from "ejs";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const app = express();
 const port = 3000;
@@ -22,14 +16,9 @@ const db = new pg.Client({
 });
 db.connect();
 
-// Set the view engine to ejs
-app.set("view engine", "ejs");
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json()); // for parsing application/json
 app.use(express.static("public"));
-// app.use(express.static(path.join(__dirname, "styles")));
-// app.use(express.static(path.join(__dirname, "images")));
 
 // Configure express-session middleware
 app.use(
@@ -40,9 +29,9 @@ app.use(
   })
 );
 
-// Route to serve the login.html file
+// Route to serve the login.ejs file
 app.get("/", (req, res) => {
-  res.sendFile("login.html", { root: __dirname }); // Use the calculated __dirname here
+  res.render("login.ejs");
 });
 
 // Middleware function to check if user is authenticated
@@ -54,14 +43,14 @@ function requireLogin(req, res, next) {
   }
 }
 
-// Update the route for index.html to use the requireLogin middleware
-app.get("/index.html", requireLogin, (req, res) => {
-  res.sendFile("index.html", { root: __dirname });
+// Update the route for index.ejs to use the requireLogin middleware
+app.get("/index", requireLogin, (req, res) => {
+  res.render("index.ejs");
 });
 
 app.get("/profile", requireLogin, (req, res) => {
   const user = req.session.user;
-  res.render("profile", { user }); // Pass user data to the profile page
+  res.render("profile.ejs", { user }); // Pass user data to the profile page
 });
 
 // Route to handle user sign-in
@@ -93,8 +82,8 @@ app.post("/signin", async (req, res) => {
         email: user.email,
       };
 
-      // Redirect to index.html upon successful login
-      res.redirect("/index.html");
+      // Redirect to index.ejs upon successful login
+      res.redirect("/index");
     } else {
       res.status(401).send("Incorrect password");
     }

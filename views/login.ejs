@@ -92,7 +92,7 @@
                 if (response.status === 401) {
                     document.getElementById('passwordError').style.display = 'block';
                 } else if (response.ok) {
-                    window.location.href = '/index.html';
+                    window.location.href = '/index';
                 } else {
                     throw new Error('Failed to login');
                 }
